@@ -1,0 +1,12 @@
+namespace SmartClinic.API.Models;
+
+public class DoctorSpecialization
+{
+    public int DoctorId { get; set; }
+
+    public Doctor? Doctor { get; set; }
+
+    public int SpecializationId { get; set; }
+
+    public Specialization? Specialization { get; set; }
+}
