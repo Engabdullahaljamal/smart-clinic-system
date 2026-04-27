@@ -29,9 +29,9 @@ The project follows a layered architecture:
 - DTOs: Control request and response data
 
 ## Main Features
-- Create, read, and delete patients
-- Create, read, and delete doctors
-- Create, read, and delete appointments
+- Create, read, update and delete patients
+- Create, read, update and delete doctors
+- Create, read, update and delete appointments
 - Store data in Azure SQL Database
 - Use DTOs for clean API input/output
 - Unit tests for service layer methods
@@ -42,24 +42,31 @@ The project follows a layered architecture:
 - Patient has many Appointments
 - Doctor has many Specializations through DoctorSpecialization
 
+## ERD
+![Smart Clinic ERD](./docs/smart-clinic-erd.png)
+
 ## API Endpoints
+All endpoints follow RESTful conventions, including full CRUD operations (Create, Read, Update, Delete).
 
 ### Patients
 - GET /api/Patients
 - GET /api/Patients/{id}
 - POST /api/Patients
+- PUT /api/Patients/{id}
 - DELETE /api/Patients/{id}
 
 ### Doctors
 - GET /api/Doctors
 - GET /api/Doctors/{id}
 - POST /api/Doctors
+- PUT /api/Doctors/{id}
 - DELETE /api/Doctors/{id}
 
 ### Appointments
 - GET /api/Appointments
 - GET /api/Appointments/{id}
 - POST /api/Appointments
+- PUT /api/Appointments/{id}
 - DELETE /api/Appointments/{id}
 
 ## Running the Project

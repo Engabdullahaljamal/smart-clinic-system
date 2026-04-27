@@ -29,7 +29,22 @@ public class PatientService : IPatientService
         await _context.SaveChangesAsync();
         return patient;
     }
+    public async Task<bool> UpdatePatientAsync(int id, Patient updatedPatient)
+    {
+        var patient = await _context.Patients.FindAsync(id);
 
+        if (patient == null)
+            return false;
+
+        patient.FullName = updatedPatient.FullName;
+        patient.DateOfBirth = updatedPatient.DateOfBirth;
+        patient.PhoneNumber = updatedPatient.PhoneNumber;
+        patient.Email = updatedPatient.Email;
+        patient.Address = updatedPatient.Address;
+
+        await _context.SaveChangesAsync();
+        return true;
+    }
     public async Task<bool> DeletePatientAsync(int id)
     {
         var patient = await _context.Patients.FindAsync(id);

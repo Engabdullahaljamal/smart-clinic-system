@@ -86,7 +86,24 @@ public class DoctorsController : ControllerBase
             result
         );
     }
+    [HttpPut("{id}")]
+    public async Task<IActionResult> UpdateDoctor(int id, DoctorCreateDTO dto)
+    {
+        var doctor = new Doctor
+        {
+            FullName = dto.FullName,
+            Email = dto.Email,
+            PhoneNumber = dto.PhoneNumber,
+            DepartmentId = dto.DepartmentId
+        };
 
+        var updated = await _doctorService.UpdateDoctorAsync(id, doctor);
+
+        if (!updated)
+            return NotFound();
+
+        return NoContent();
+    }
     [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteDoctor(int id)
     {

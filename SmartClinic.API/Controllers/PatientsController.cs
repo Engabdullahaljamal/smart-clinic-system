@@ -87,7 +87,26 @@ public class PatientsController : ControllerBase
             result
         );
     }
+    [HttpPut("{id}")]
+    public async Task<IActionResult> UpdatePatient(int id, PatientCreateDTO dto)
+    {
+        var patient = new Patient
+        {
+            FullName = dto.FullName,
+            DateOfBirth = dto.DateOfBirth,
+            PhoneNumber = dto.PhoneNumber,
+            Email = dto.Email,
+            Address = dto.Address
+        };
 
+        var updated = await _patientService.UpdatePatientAsync(id, patient);
+
+        if (!updated)
+            return NotFound();
+
+        return NoContent();
+    }
+    
     [HttpDelete("{id}")]
     public async Task<IActionResult> DeletePatient(int id)
     {

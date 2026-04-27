@@ -91,7 +91,25 @@ public class AppointmentsController : ControllerBase
             result
         );
     }
+    [HttpPut("{id}")]
+    public async Task<IActionResult> UpdateAppointment(int id, AppointmentCreateDTO dto)
+    {
+        var appointment = new Appointment
+        {
+            AppointmentDate = dto.AppointmentDate,
+            Status = dto.Status,
+            Notes = dto.Notes,
+            PatientId = dto.PatientId,
+            DoctorId = dto.DoctorId
+        };
 
+        var updated = await _appointmentService.UpdateAppointmentAsync(id, appointment);
+
+        if (!updated)
+            return NotFound();
+
+        return NoContent();
+    }
     [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteAppointment(int id)
     {

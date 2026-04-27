@@ -33,7 +33,21 @@ public class DoctorService : IDoctorService
         await _context.SaveChangesAsync();
         return doctor;
     }
+    public async Task<bool> UpdateDoctorAsync(int id, Doctor updatedDoctor)
+    {
+        var doctor = await _context.Doctors.FindAsync(id);
 
+        if (doctor == null)
+            return false;
+
+        doctor.FullName = updatedDoctor.FullName;
+        doctor.Email = updatedDoctor.Email;
+        doctor.PhoneNumber = updatedDoctor.PhoneNumber;
+        doctor.DepartmentId = updatedDoctor.DepartmentId;
+
+        await _context.SaveChangesAsync();
+        return true;
+    }
     public async Task<bool> DeleteDoctorAsync(int id)
     {
         var doctor = await _context.Doctors.FindAsync(id);
